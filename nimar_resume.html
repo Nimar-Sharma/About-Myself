@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nimar — Resume</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0e0c0a;
+      --paper: #f5f0e8;
+      --accent: #c8410b;
+      --accent2: #1a3a5c;
+      --mid: #6b6560;
+      --rule: #d4cec5;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .no-print {
+        display: none;
+      }
+    }
+
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 48px 24px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      border-top: 3px solid var(--ink);
+      border-bottom: 1px solid var(--rule);
+      padding: 28px 0 20px;
+      gap: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .name-block h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(44px, 7vw, 72px);
+      line-height: 0.9;
+      letter-spacing: -1px;
+      color: var(--ink);
+    }
+
+    .name-block h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 10px;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-size: 11px;
+      color: var(--mid);
+      line-height: 2;
+    }
+
+    .contact-block a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    /* ── AWARD BANNER ── */
+    .award-banner {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 10px 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .award-banner .star {
+      font-size: 18px;
+      color: #f0b429;
+    }
+
+    .award-banner span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .award-banner .sub {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0;
+      color: #b0a898;
+    }
+
+    /* ── BODY GRID ── */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      margin-top: 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      border-right: 1px solid var(--rule);
+      padding: 32px 24px 32px 0;
+      animation: fadeUp 0.6s 0.15s ease both;
+    }
+
+    .sidebar-section {
+      margin-bottom: 32px;
+    }
+
+    .sidebar-section:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      padding: 32px 0 32px 32px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 9px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .label-tag {
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0;
+      text-transform: none;
+      background: var(--accent);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 4px;
+    }
+
+    /* ── SKILLS PILLS ── */
+    .skill-group {
+      margin-bottom: 10px;
+    }
+
+    .skill-group-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 5px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .pill {
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+    }
+
+    .pill.accent {
+      background: var(--accent);
+    }
+
+    .pill.outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item {
+      margin-bottom: 16px;
+    }
+
+    .edu-item .degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .edu-item .school {
+      color: var(--mid);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .edu-item .year {
+      font-size: 10px;
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* ── LINKS ── */
+    .link-item {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .link-item .lbl {
+      color: var(--mid);
+      font-size: 10px;
+      min-width: 36px;
+    }
+
+    .link-item a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    /* ── EXPERIENCE CARD ── */
+    .exp-card {
+      border-left: 2px solid var(--rule);
+      padding-left: 16px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .exp-card::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      left: -4.5px;
+      top: 5px;
+    }
+
+    .exp-card .role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .exp-card .org {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-top: 1px;
+    }
+
+    .exp-card .period {
+      font-size: 10px;
+      color: var(--mid);
+      margin-top: 1px;
+      margin-bottom: 8px;
+    }
+
+    .exp-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-card ul li {
+      font-size: 11.5px;
+      color: #2a2520;
+      line-height: 1.65;
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .exp-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 10px;
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--ink);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .project-card .proj-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px;
+    }
+
+    .project-card .proj-stack {
+      font-size: 10px;
+      color: var(--mid);
+      margin-top: 2px;
+      margin-bottom: 8px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .project-card p {
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: #2a2520;
+    }
+
+    .project-card .proj-badge {
+      position: absolute;
+      top: -1px;
+      right: 14px;
+      background: var(--accent);
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--rule);
+      margin: 8px 0 24px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 10px 20px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .print-btn:hover {
+      background: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="name-block">
+        <h1>Nimar<em>Sharma</em></h1>
+        <p class="tagline">Founder · Creative Thinker</p>
+      </div>
+      <div class="contact-block">
+        <div>Chitkara University, Punjab, India</div>
+        <div>Providence University,Taiwan</div>
+        <!-- <div><a href="mailto:nimar@example.com">nimar@example.com</a></div> -->
+        <div><a href="https://www.linkedin.com/in/nimar-sharma/" target="_blank">This is my LinkedIn!,</a></div>
+        <div><a href="https://github.com/Nimar-Sharma" target="_blank">my GitHub!,</a></div>
+        <div><a href="https://thebaseclub.org" target="_blank">and one of my Website!</a></div>
+      </div>
+    </header>
+
+    <!-- AWARD BANNER -->
+    <div class="award-banner">
+      <span class="star">★</span>
+      <div>
+        <span>Apple Swift Student Challenge — Distinguished Winner 2026</span><br>
+        <span class="sub">One of 50 selected globally · BlindBridge - Navigation for the Visually Impaired</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="body-grid">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <div class="sidebar-section">
+          <div class="section-label">Skills</div>
+
+          <div class="skill-group">
+            <div class="skill-group-label">Languages</div>
+            <div class="pills">
+              <span class="pill accent">Swift</span>
+              <span class="pill">Java</span>
+              <span class="pill">Python</span>
+              <span class="pill">JavaScript</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill">SQL</span>
+            </div>
+          </div>
+
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-label">Frameworks & Tools</div>
+            <div class="pills">
+              <span class="label-tag">Artificial Intelligence</span>
+              <span class="pill">React</span>
+              <span class="pill">Next.js</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">ARKit</span>
+              <span class="pill">Core ML</span>
+              <span class="pill">Vision</span>
+              <span class="pill">PostgreSQL</span>
+              <span class="pill">Clerk</span>
+              <span class="pill">Stripe</span>
+              <span class="pill">Figma</span>
+              <span class="pill">Illustrator</span>
+              <span class="pill">Photoshop</span>
+            </div>
+          </div>
+
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-label">Infrastructure</div>
+            <div class="pills">
+              <span class="pill outline">Vercel</span>
+              <span class="pill outline">Cloudflare R2</span>
+              <span class="pill outline">Neon DB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-label">Education</div>
+          <div class="edu-item">
+            <div class="degree">B.E. Computer Science</div>
+            <div class="school">Chitkara University<br>Punjab, India</div>
+            <div class="year">2024 – 2028</div>
+          </div>
+          <div class="edu-item">
+            <div class="degree">International Business & International Programme in Computer Science</div>
+            <div class="school">Providence University (Exchange Program)<br>Taichung, Taiwan</div>
+            <div class="year">Sep 2025 – Jan 2026</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-label">Links</div>
+          <div class="link-item">
+            <span class="lbl">TheBaseClub</span>
+            <a href="https://thebaseclub.org">thebaseclub.org</a>
+          </div>
+          <div class="link-item">
+            <span class="lbl">LI</span>
+            <a href="https://www.linkedin.com/in/nimar-sharma/">linkedin.com/in/nimar-sharma</a>
+          </div>
+          <div class="link-item">
+            <span class="lbl">Git</span>
+            <a href="https://github.com/Nimar-Sharma">github.com/Nimar-Sharma</a>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-label">Interests</div>
+          <div style="font-size:11px; color: var(--mid); line-height:1.9">
+            Community Building<br>
+            Founder Ecosystems<br>
+            Accessibility Tech<br>
+            AR & Computer Vision<br>
+            Music (always on)
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+
+        <!-- EXPERIENCE -->
+        <div class="section-label">Experience</div>
+
+        <div class="exp-card">
+          <div class="role">Co-Founder</div>
+          <div class="org">The Base Club (Alpha Testing)</div>
+          <div class="period">2025 – Present · International · Startup</div>
+          <ul>
+            <li>Co-founded an international community with my Signporean Co-Founder Edus connecting scholars and
+              founders across the world to collaborate,
+              network, and host events.</li>
+            <li>Built the platform in React, featuring structured event IDs,
+              three visibility tiers, a Host Panel, Super Admin access, and bulk mailing via Gmail SMTP, and yes I use
+              AI.</li>
+            <li>Planning events strategy, and cross-university partnerships (BITS Goa E - Cell confirmed,
+              International University of Monaco E-Cell confirmed and serveral others confirmed).</li>
+            <li>Grew and manage an international Discord community of 120+ members spanning 33+ countries.</li>
+          </ul>
+        </div>
+
+
+        <div class="exp-card">
+          <div class="role">Founder</div>
+          <div class="org">Blind Bridge (Apple Swift Student Challenge — Distinguished Winner 2026)</div>
+          <div class="period">2024 – Present · Accessibility</div>
+          <ul>
+            <li>Built an iOS app using Swift and SwiftUI that serves as a real-time navigation and object recognition
+              system for the visually impaired.</li>
+            <li>Integrated Apple's Vision framework for text and object detection, Core ML for on-device AI inference,
+              and ARKit</li>
+            <li>Blind User Tested!</li>
+          </ul>
+        </div>
+
+        <div class="exp-card">
+          <div class="role">Founder</div>
+          <div class="org">Boostify Labs (Pre - Alpha Testing)</div>
+          <div class="period">2025 – Present · International · Startup</div>
+          <ul>
+            <li>Building a game boosting marketplace starting with Brawl Stars, architected on Next.js, Neon
+              PostgreSQL,
+              Cloudflare, Clerk, Pusher, and Stripe.</li>
+            <li>Designed role-separated buyer/booster flows, identity verification with hashed government IDs, tiered
+              listings, and global payment routing (Stripe → Wise for international, UPI for India).</li>
+          </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PROJECTS -->
+        <div class="section-label">Work</div>
+
+        <div class="project-card">
+          <div class="proj-badge">WWDC 2026</div>
+          <div class="proj-name">BlindBridge</div>
+          <div class="proj-stack">Swift · ARKit · Core ML · Core Haptics · Vision Framework</div>
+          <p>Navigation app for visually impaired users — works entirely offline with no extra hardware. Uses the
+            iPhone to understand surroundings and communicates via rich haptic feedback. Built during a Taiwan
+            exchange after witnessing a blind student struggle to navigate campus; tested with that student before
+            returning. Earned a place among 50 Distinguished Winners globally in the 2026 Apple Swift Student
+            Challenge.
+          </p>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-name">thebaseclub.org</div>
+          <div class="proj-stack">React · Node.js · Nodemailer · Gmail SMTP · Custom Design System</div>
+          <p>Full-stack community platform with event creation, three-tier visibility controls, a Host Panel allowing
+            any user to submit events for review, a Super Admin panel, and pre-scheduled bulk mailing.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ACHIEVEMENTS -->
+        <div class="section-label">Recognition</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="border:1px solid var(--rule); padding: 12px; border-left: 3px solid var(--accent);">
+            <div style="font-family:'DM Serif Display',serif; font-size:14px;">Apple Distinguished Winner</div>
+            <div style="font-size:10px; color:var(--mid); margin-top:3px;">Swift Student Challenge 2026 · Top 50
+              Worldwide</div>
+          </div>
+          <div style="border:1px solid var(--rule); padding: 12px; border-left: 3px solid var(--accent2);">
+            <div style="font-family:'DM Serif Display',serif; font-size:14px;">WWDC 2026 Invitee</div>
+            <div style="font-size:10px; color:var(--mid); margin-top:3px;">Apple's annual developer conference ·
+              Cupertino, June 2026</div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <button class="print-btn no-print" onclick="window.print()">⌘ Print / Save PDF</button>
+
+</body>
+
+</html>
